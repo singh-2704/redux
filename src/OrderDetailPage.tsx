@@ -2,7 +2,7 @@ import { FC, memo, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ordersMapSelector, ordersProductsSelector } from "./selector/order";
+import { ordersProductsSelector, orderMapSelector} from "./selector/order";
 import axios from "axios";
 import { ordersDetailLoadedAction } from "./action/order";
 
@@ -11,7 +11,7 @@ const OrderDetailPage: FC<OrderDetailPageProps> = (props) => {
   const dispatch = useDispatch();
   const params = useParams();
   const orderId = +params.orderId!;
-  const ordersMap = useSelector(ordersMapSelector);
+  const ordersMap = useSelector(orderMapSelector);
   const order = ordersMap[orderId];
   const ordersProductsMap = useSelector(ordersProductsSelector);
   const orderProduct = ordersProductsMap[orderId];

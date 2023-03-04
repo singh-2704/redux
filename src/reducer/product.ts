@@ -4,7 +4,7 @@ import { produce } from "immer";
 import {Product} from '../model/product';
 import { normalize, schema } from "normalizr";
 import { ORDER_DETAIL_LOADED, ORDER_LOADED } from "../action/order";
-// import { DRAFTABLE } from "immer/dist/internal";
+
 
 type normalizedProduct = {
   [id: number]: Product;

@@ -4,11 +4,11 @@ import { produce } from "immer";
 import Order from "../model/order";
 import { ORDER_LOADED } from "../action/order";
 import { ORDER_DETAIL_LOADED } from "../action/order";
-import { normalize, schema, Schema } from "normalizr";
+import { normalize, schema } from "normalizr";
 
 type NormalizedOrder = { [id: number]: Order };
 export type State = {
-  orders: { [id: number]: Order };
+  orders: NormalizedOrder;
   loading: boolean;
 };
 export const initialState: State = {
@@ -37,7 +37,12 @@ console.log("data",data)
     case ORDER_DETAIL_LOADED:
       return produce(state, (draft) => {
         const order = action.payload;
-        draft.orders[order.id] = order;
+        const productEntity = new schema.Entity("products");
+        const orderEntity = new schema.Entity("order",
+        {products: [productEntity],});
+        const data = normalize(order, orderEntity);
+        console.log("singleOrder",data)
+        draft.orders[order.id] = data.entities.order![order.id];
       });
     default:
       return state;

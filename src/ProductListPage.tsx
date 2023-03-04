@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { productsloadingselector, productsselector } from "./selector/product";
 import { loadProductsAction, productsLoadedAction } from "./action/Product";
 import axios from 'axios';
+import { ORDER_LOADED } from "./action/order";
 
 type ProductListPageProps = {};
 const ProductListPage: FC<ProductListPageProps> = (props) => {
@@ -13,7 +14,7 @@ const ProductListPage: FC<ProductListPageProps> = (props) => {
   useEffect(() => {
     dispatch(loadProductsAction());
     axios.get("https://dummyjson.com/products").then((response)=>dispatch(productsLoadedAction(response.data.products)));
-  }, []);
+  }, [ORDER_LOADED]);
  
   return (
     <div>{loading && <div className="bg-red-500">...Loading</div>}

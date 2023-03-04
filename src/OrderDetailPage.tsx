@@ -2,7 +2,7 @@ import { FC, memo, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ordersMapSelector } from "./selector/order";
+import { ordersMapSelector, ordersProductsSelector } from "./selector/order";
 import axios from "axios";
 import { ordersDetailLoadedAction } from "./action/order";
 
@@ -13,6 +13,9 @@ const OrderDetailPage: FC<OrderDetailPageProps> = (props) => {
   const orderId = +params.orderId!;
   const ordersMap = useSelector(ordersMapSelector);
   const order = ordersMap[orderId];
+  const ordersProductsMap = useSelector(ordersProductsSelector);
+  const orderProduct = ordersProductsMap[orderId];
+  console.log("orderProduct", orderProduct);
  
 
   useEffect(() => {
@@ -30,7 +33,10 @@ const OrderDetailPage: FC<OrderDetailPageProps> = (props) => {
   return (
     <div>
       This is order detail page for {order.id}<br/>
-     {order.total} {order.totalProducts}
+     {order.total} {order.totalProducts}{order.totalQuantity}
+     {orderProduct.map((item)=>
+     <div key= {item.id}>{item.title}</div>
+     )}
     </div>
   );
 };

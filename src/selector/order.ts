@@ -1,5 +1,5 @@
 import { State } from "../store";
-
+import { Product } from "../model/product";
 export function loadOrderSelector(state: State){
     return state.orders.loading;
     
@@ -12,5 +12,13 @@ export function loadOrderSelector(state: State){
 }
 export function ordersMapSelector(state: State){
     return state.orders.orders;
-    
+    }
+
+export function ordersProductsSelector(state: State){
+   return Object.keys(state.orders.orders).reduce<{[orderId: number]: Product[]}>((previous, currentOrderId)=>{
+        const order = state.orders.orders[+currentOrderId];
+        const products = order.products.map((pid)=>state.products.products[pid]);
+        console.log("order",products)
+        return {...previous, [currentOrderId]: products};
+    }, {})
 }

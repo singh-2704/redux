@@ -1,5 +1,5 @@
 
-type Order = {
+export type Order = {
   id: number;
   total: number;
   products: number[];

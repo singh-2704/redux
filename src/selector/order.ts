@@ -10,22 +10,22 @@ export function productstateSelector(state: State){
     return state.products
   }
 
-export const productMapSelector = createSelector(productstateSelector, productMap=>productMap.products
+export const productsMapSelector = createSelector(productstateSelector, productMap=>productMap.products
     )
 export const loadOrderSelector = createSelector(orderStateSelector,(orderMap)=>{
     return orderMap.loading;
 })
 
 
-export const orderMapSelector = createSelector(orderStateSelector, (orderMap)=>{
+export const ordersMapSelector = createSelector(orderStateSelector, (orderMap)=>{
     return orderMap.orders;
 });
 
-export const orderSelector = createSelector(orderMapSelector,(normalizedOrder)=>{
+export const orderSelector = createSelector(ordersMapSelector,(normalizedOrder)=>{
     return (Object.keys(normalizedOrder).map((orderId)=>normalizedOrder[+orderId]));
 })
 
-export const ordersProductsSelector = createSelector(orderMapSelector,productMapSelector,(orderMap, productMap)=>
+export const ordersProductsSelector = createSelector(ordersMapSelector,productsMapSelector,(orderMap, productMap)=>
 {
     return Object.keys(orderMap).reduce<{[orderId: number]: Product[]}>((previous, currentOrderId)=>{
         const order = orderMap[+currentOrderId];

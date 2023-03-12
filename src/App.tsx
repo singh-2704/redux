@@ -6,7 +6,7 @@ import SadIncrementor from './SadIncrementor';
 import ProductListPage from './ProductListPage';
 import {Routes, Route} from 'react-router-dom';
 import OrderListPage from './OrderListPage';
-import OrderDetailPage from './OrderDetailPage';
+import OrderDetailPage from './OrderDetailPageWithRedux';
 
 export default function App() {
 
@@ -20,7 +20,7 @@ export default function App() {
     <Routes>
       <Route index element={<ProductListPage/>}></Route>
       <Route path="/orders" element={<OrderListPage/>}></Route>
-      <Route path="/orders/:orderId" element={<OrderDetailPage/>}></Route>
+      <Route path="/orders/:orderId" element={<OrderDetailPage orderId={2}/>}></Route>
     </Routes>
     </div>
   )
